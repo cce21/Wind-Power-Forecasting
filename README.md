@@ -58,7 +58,7 @@ single turbine from the test set is shown on the right for the RNN model. You
 can see that the model is very good at making short-term predictions, but  
 then after 24 hours it is not accurate. This illustrates the issues with RNN models in forecasting accurately farther into the future.
 
-<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/example_forecast.png" width="500">
+<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/exampleforecast.png" width="500">
 
 
 ## Conclusions 
