@@ -13,23 +13,23 @@ The project task is to estimate the wind power supply of a wind farm using only 
 ## Data Sources 
 The source of the dataset is from a wind power producer in China, Longyuan Power Group Corp. Ltd.  The data comes from a wind farm of 134 turbines. The dataset consists of the relative location of each  turbine in the wind farm, wind, temperature, turbine angle and historical wind power.  The time span of the dataset is half a year, where every 10 minutes a Supervisory Control and Data  Acquisition (SCADA) system takes a sample from each wind turbine in the wind farm. There is a total of  245 days of data, consisting of 13 columns with a total of 4.75 million records.  
 Below are the detailed columns of the dataset (source: “SDWPF: A Dataset for Spatial Dynamic Wind  Power Forecasting Challenge at KDD Cup 2022”)
-<img src="https://github.com/cce21/NNWindForecast/blob/main/img/columns.png" width="500">
+<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/columns.png" width="500">
 
 
 ## Exploratory Data Analysis 
 The power readings in each wind turbine are highly variable, where the power output can go from zero to high values in very short periods of time, then go back to 0 again, Figure 1 below displays the power  output for a specific turbine. The daily mean power plot smooths this pattern, but the daily mean power  output is also highly variable, displayed in Figure 2. 
-<img src="https://github.com/cce21/NNWindForecast/blob/main/img/powervstime.png" width="500">
+<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/powervstime.png" width="500">
 
-<img src="https://github.com/cce21/NNWindForecast/blob/main/img/meanpowervstime.png" width="500">
+<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/meanpowervstime.png" width="500">
 The correlation plot below explains the relationship between each feature:
-<img src="https://github.com/cce21/NNWindForecast/blob/main/img/correlation.png" width="500">
+<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/correlation.png" width="500">
 
 
 The correlation matrix shows that the Wind Speed has a high positive correlation with the power output  (‘Patv’), which aligns with the physics of wind turbines. Wind speeds are variable in nature, which is why  the power output has high variability. There is a low correlation for directional features Ndir & Wdir and  temperature features Etmp & Itmp. This indicates the model wouldn’t lose much accuracy and considerations can be made to remove them from the dataset. Also, there is perfect correlation  between the pitch angle features Pab1, Pab2, Pab3. The dataset can further be reduced by using one  variable for the pitch angle. My final model consisted only of the features Wind Speed (Wspd), Nacelle direction (Ndir), and the pitch angle of blade 1 (Pab1). I experimented discarding the other variables because of the low correlation with power generation and the accuracy decreased a trivial amount.
 
 
 Another EDA discovery was that the power output has a maximum threshold, where after a certain wind  speed is reached, the power output approaches a maximum that cannot be exceeded. This intricacy has  effects on modeling where improvements to my models could be made to take this into account and  ‘trim’ forecasts. The plot below is an example of one turbine’s power output versus time which showcases the behavior from above. 
-<img src="https://github.com/cce21/NNWindForecast/blob/main/img/power.png" width="500">
+<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/power.png" width="500">
 
 
 
@@ -41,7 +41,7 @@ RNN Model
 The reason I chose to use an RNN model is because of the excellent results this deep learning method  exhibits on time series forecasting tasks and the large dataset provided has enough data to effectively  train this model. The RNN model processes memories of sequential data and stores historical data from previous inputs into the model’s internal state, while predicting a target  vector. 
 
 Visual of a simple RNN model architecture:
-<img src="https://github.com/cce21/NNWindForecast/blob/main/img/rnn.png" width="500">
+<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/rnn.png" width="500">
 
 I divided the data into training and validation sets and used a testing dataset provided by the  competition for final evaluation. I used the first 153 days of data to train the model, and next 16 days for validation. 
 The parameters I tuned to improve model performance were the number of layers, dropout,  number of epochs, batch size, and learning rate. 
@@ -58,7 +58,7 @@ single turbine from the test set is shown on the right for the RNN model. You
 can see that the model is very good at making short-term predictions, but  
 then after 24 hours it is not accurate. This illustrates the issues with RNN models in forecasting accurately farther into the future.
 
-<img src="https://github.com/cce21/NNWindForecast/blob/main/img/example_forecast.png" width="500">
+<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/example_forecast.png" width="500">
 
 
 ## Conclusions 
