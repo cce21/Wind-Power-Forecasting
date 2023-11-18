@@ -18,7 +18,7 @@ Below are the detailed columns of the dataset (source: “SDWPF: A Dataset for S
 
 ## Exploratory Data Analysis 
 The power readings in each wind turbine are highly variable, where the power output can go from zero to high values in very short periods of time, then go back to 0 again, Figure 1 below displays the power  output for a specific turbine. The daily mean power plot smooths this pattern, but the daily mean power  output is also highly variable, displayed in Figure 2. 
-<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/powervstime.png" width="500">
+<img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/turbinevstime.png" width="500">
 
 <img src="https://github.com/cce21/Wind-Power-Forecasting/blob/main/img/meanpowervstime.png" width="500">
 The correlation plot below explains the relationship between each feature:
